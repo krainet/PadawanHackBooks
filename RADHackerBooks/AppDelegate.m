@@ -7,6 +7,13 @@
 //
 
 #import "AppDelegate.h"
+#import "RADBookViewController.h"
+#import "RADLibTableViewController.h"
+#import "RADBook.h"
+#import "RADLibrary.h"
+
+#import "Settings.h"
+
 
 @interface AppDelegate ()
 
@@ -17,11 +24,82 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+
+    //Detectar Pantalla
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad){
+        //Somos tablet
+        self.displayType=1;
+    } else {
+        //Somos phone
+        self.displayType=2;
+    }
+    [self configureForDisplayType:self.displayType];
+    
+    
+    
+    self.window.backgroundColor = [UIColor greenColor];
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+
+#pragma mark - Utils
+-(void) configureForDisplayType: (NSUInteger) idType{
+    if(idType==1){
+        //isPad
+        //is phone
+        //Creamos modelo
+        RADLibrary *library = [[RADLibrary alloc]initFromRemoteJson];
+        
+        //Creamos controlador
+        RADLibTableViewController *libVC = [[RADLibTableViewController alloc]initWithModel:library style:UITableViewStyleGrouped];
+        RADBookViewController *bookVC = [[RADBookViewController alloc]initWithModel:[library.libraryBooks objectAtIndex:0]];
+        
+        UINavigationController *navLib=[[UINavigationController alloc]initWithRootViewController:libVC];
+        UINavigationController *navBook=[[UINavigationController alloc]initWithRootViewController:bookVC];
+        
+        //Creamos Combinador
+        UISplitViewController *splitVC = [[UISplitViewController alloc]init];
+        splitVC.viewControllers=@[navLib,navBook];
+        
+        //Asignamos delegados
+        splitVC.delegate=bookVC;
+        libVC.delegate=bookVC;
+        
+        //Asignamos root
+        self.window.rootViewController=splitVC;
+        
+        
+    } else {
+        //is phone
+        //Creamos modelo
+        RADLibrary *library = [[RADLibrary alloc]initFromRemoteJson];
+        
+        //Creamos controlador
+        //RADLibTableViewController *tVC = [[RADLibTableViewController alloc]initWithModel:library style:UITableViewStyleGrouped];
+        RADLibTableViewController *libVC = [[RADLibTableViewController alloc]initWithModel:library style:UITableViewStyleGrouped];
+        
+        //Creamos Combinador
+        UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:libVC];
+        
+        //Asegnamos delegados
+        libVC.delegate=libVC;
+        
+        //Asignamos root
+        self.window.rootViewController=navVC;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

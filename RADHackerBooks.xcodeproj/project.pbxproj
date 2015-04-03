@@ -7,11 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E4DE3721ACD5456008F4BCD /* RADLibTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4DE3711ACD5456008F4BCD /* RADLibTableViewController.m */; };
+		1E4DE38A1ACEEB83008F4BCD /* RADBookWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4DE3881ACEEB83008F4BCD /* RADBookWebViewController.m */; };
+		1E4DE38B1ACEEB83008F4BCD /* RADBookWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E4DE3891ACEEB83008F4BCD /* RADBookWebViewController.xib */; };
 		1ED6A3A91AC6A54B00AA9D69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6A3A81AC6A54B00AA9D69 /* main.m */; };
 		1ED6A3AC1AC6A54B00AA9D69 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6A3AB1AC6A54B00AA9D69 /* AppDelegate.m */; };
 		1ED6A3AE1AC6A54B00AA9D69 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ED6A3AD1AC6A54B00AA9D69 /* Images.xcassets */; };
 		1ED6A3B11AC6A54B00AA9D69 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1ED6A3AF1AC6A54B00AA9D69 /* LaunchScreen.xib */; };
 		1ED6A3BD1AC6A54B00AA9D69 /* RADHackerBooksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6A3BC1AC6A54B00AA9D69 /* RADHackerBooksTests.m */; };
+		1ED6A3C81AC6A84E00AA9D69 /* RADBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6A3C71AC6A84E00AA9D69 /* RADBook.m */; };
+		1ED6A3CC1AC6AF3200AA9D69 /* RADLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6A3CB1AC6AF3200AA9D69 /* RADLibrary.m */; };
+		1ED6A3D01AC6C79200AA9D69 /* RADBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6A3CE1AC6C79200AA9D69 /* RADBookViewController.m */; };
+		1ED6A3D11AC6C79200AA9D69 /* RADBookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1ED6A3CF1AC6C79200AA9D69 /* RADBookViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +32,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E4DE3701ACD5456008F4BCD /* RADLibTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RADLibTableViewController.h; sourceTree = "<group>"; };
+		1E4DE3711ACD5456008F4BCD /* RADLibTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RADLibTableViewController.m; sourceTree = "<group>"; };
+		1E4DE3871ACEEB83008F4BCD /* RADBookWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RADBookWebViewController.h; sourceTree = "<group>"; };
+		1E4DE3881ACEEB83008F4BCD /* RADBookWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RADBookWebViewController.m; sourceTree = "<group>"; };
+		1E4DE3891ACEEB83008F4BCD /* RADBookWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RADBookWebViewController.xib; sourceTree = "<group>"; };
 		1ED6A3A31AC6A54B00AA9D69 /* RADHackerBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RADHackerBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ED6A3A71AC6A54B00AA9D69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1ED6A3A81AC6A54B00AA9D69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -35,6 +47,14 @@
 		1ED6A3B61AC6A54B00AA9D69 /* RADHackerBooksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RADHackerBooksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ED6A3BB1AC6A54B00AA9D69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1ED6A3BC1AC6A54B00AA9D69 /* RADHackerBooksTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RADHackerBooksTests.m; sourceTree = "<group>"; };
+		1ED6A3C61AC6A84E00AA9D69 /* RADBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RADBook.h; sourceTree = "<group>"; };
+		1ED6A3C71AC6A84E00AA9D69 /* RADBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RADBook.m; sourceTree = "<group>"; };
+		1ED6A3CA1AC6AF3200AA9D69 /* RADLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RADLibrary.h; sourceTree = "<group>"; };
+		1ED6A3CB1AC6AF3200AA9D69 /* RADLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RADLibrary.m; sourceTree = "<group>"; };
+		1ED6A3CD1AC6C79200AA9D69 /* RADBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RADBookViewController.h; sourceTree = "<group>"; };
+		1ED6A3CE1AC6C79200AA9D69 /* RADBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RADBookViewController.m; sourceTree = "<group>"; };
+		1ED6A3CF1AC6C79200AA9D69 /* RADBookViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RADBookViewController.xib; sourceTree = "<group>"; };
+		1ED6A3D31AC6D06E00AA9D69 /* Settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +75,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1ECF11971AC6F9D300C50228 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		1ED6A39A1AC6A54B00AA9D69 = {
 			isa = PBXGroup;
 			children = (
@@ -76,11 +103,15 @@
 		1ED6A3A51AC6A54B00AA9D69 /* RADHackerBooks */ = {
 			isa = PBXGroup;
 			children = (
+				1ECF11971AC6F9D300C50228 /* Resources */,
 				1ED6A3AA1AC6A54B00AA9D69 /* AppDelegate.h */,
 				1ED6A3AB1AC6A54B00AA9D69 /* AppDelegate.m */,
 				1ED6A3AD1AC6A54B00AA9D69 /* Images.xcassets */,
 				1ED6A3AF1AC6A54B00AA9D69 /* LaunchScreen.xib */,
 				1ED6A3A61AC6A54B00AA9D69 /* Supporting Files */,
+				1ED6A3C91AC6A85400AA9D69 /* Models */,
+				1ED6A3D21AC6C79900AA9D69 /* Controllers */,
+				1ED6A3D31AC6D06E00AA9D69 /* Settings.h */,
 			);
 			path = RADHackerBooks;
 			sourceTree = "<group>";
@@ -109,6 +140,32 @@
 				1ED6A3BB1AC6A54B00AA9D69 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1ED6A3C91AC6A85400AA9D69 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1ED6A3C61AC6A84E00AA9D69 /* RADBook.h */,
+				1ED6A3C71AC6A84E00AA9D69 /* RADBook.m */,
+				1ED6A3CA1AC6AF3200AA9D69 /* RADLibrary.h */,
+				1ED6A3CB1AC6AF3200AA9D69 /* RADLibrary.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		1ED6A3D21AC6C79900AA9D69 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1ED6A3CD1AC6C79200AA9D69 /* RADBookViewController.h */,
+				1ED6A3CE1AC6C79200AA9D69 /* RADBookViewController.m */,
+				1ED6A3CF1AC6C79200AA9D69 /* RADBookViewController.xib */,
+				1E4DE3701ACD5456008F4BCD /* RADLibTableViewController.h */,
+				1E4DE3711ACD5456008F4BCD /* RADLibTableViewController.m */,
+				1E4DE3871ACEEB83008F4BCD /* RADBookWebViewController.h */,
+				1E4DE3881ACEEB83008F4BCD /* RADBookWebViewController.m */,
+				1E4DE3891ACEEB83008F4BCD /* RADBookWebViewController.xib */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,11 +212,13 @@
 		1ED6A39B1AC6A54B00AA9D69 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = RAD;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = Krainet;
 				TargetAttributes = {
 					1ED6A3A21AC6A54B00AA9D69 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 65TEXX58WW;
 					};
 					1ED6A3B51AC6A54B00AA9D69 = {
 						CreatedOnToolsVersion = 6.2;
@@ -191,6 +250,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E4DE38B1ACEEB83008F4BCD /* RADBookWebViewController.xib in Resources */,
+				1ED6A3D11AC6C79200AA9D69 /* RADBookViewController.xib in Resources */,
 				1ED6A3B11AC6A54B00AA9D69 /* LaunchScreen.xib in Resources */,
 				1ED6A3AE1AC6A54B00AA9D69 /* Images.xcassets in Resources */,
 			);
@@ -210,8 +271,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E4DE3721ACD5456008F4BCD /* RADLibTableViewController.m in Sources */,
+				1ED6A3D01AC6C79200AA9D69 /* RADBookViewController.m in Sources */,
+				1ED6A3C81AC6A84E00AA9D69 /* RADBook.m in Sources */,
 				1ED6A3AC1AC6A54B00AA9D69 /* AppDelegate.m in Sources */,
+				1E4DE38A1ACEEB83008F4BCD /* RADBookWebViewController.m in Sources */,
 				1ED6A3A91AC6A54B00AA9D69 /* main.m in Sources */,
+				1ED6A3CC1AC6AF3200AA9D69 /* RADLibrary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,9 +393,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RADHackerBooks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -337,9 +405,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RADHackerBooks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -396,6 +466,7 @@
 				1ED6A3C21AC6A54B00AA9D69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1ED6A3C31AC6A54B00AA9D69 /* Build configuration list for PBXNativeTarget "RADHackerBooksTests" */ = {
 			isa = XCConfigurationList;
@@ -404,6 +475,7 @@
 				1ED6A3C51AC6A54B00AA9D69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
