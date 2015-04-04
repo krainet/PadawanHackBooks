@@ -21,7 +21,7 @@
 -(id) initWithModel:(RADLibrary*) model style:(UITableViewStyle) style{
     if(self=[super initWithStyle:style]){
         _model=model;
-        self.title=@"Hacker Books r00lz!";
+        self.title=@"Mi Librería";
     }
     return self;
 }
@@ -39,7 +39,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+
     //averiguar de que tag nos están hablando
     RADBook *book = [self.model bookForTag:[self.model.tags objectAtIndex:indexPath.section] atIndex:indexPath.row];
 
@@ -64,16 +64,15 @@
     
     //Que libro tengo
     RADBook *book = [self.model bookForTag:[self.model.tags objectAtIndex:indexPath.section] atIndex:indexPath.row];
-    [self.delegate tvcSelectsBook:book arrayOfBooks:self.model.libraryBooks];
     
+    //Delegado
+    [self.delegate tvcSelectsBook:book];
     
-    
-    //Creamos una instancia del libro
-    //RADBookViewController *bookVC = [[RADBookViewController alloc]initWithModel:book];
-    
-    //Hacemos push al navigation controller
-    //[self.navigationController pushViewController:bookVC animated:YES];
-    
+    //Save defaults
+    //TODO comprobar si un favorito ya no está para poder mostrarlo como userdefault.
+    if(indexPath.section!=0){
+        [self saveLastSelectedBookAtSectio:indexPath.section row:indexPath.row];
+    }
     
 }
 
@@ -84,33 +83,76 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
+    
     //self.navigationController.navigationBar.barTintColor=[UIColor colorWithRed:0.5 green:0 blue:0.13 alpha:1];
 }
 
 
 #pragma mark Delegate LibTableViewControllerDelegate
--(void)tvcSelectsBook:(RADBook*)book arrayOfBooks:(NSArray*)books{
+-(void)tvcSelectsBook:(RADBook*)book{
     RADBookViewController *bookVC = [[RADBookViewController alloc]initWithModel:book];
     [self.navigationController pushViewController:bookVC animated:YES];
 }
 
+#pragma mark Utils
+-(RADBook*) lastSelectedBook{
+    NSIndexPath *indexPath=nil;
+    NSDictionary *coords=nil;
+    
+    coords=[[NSUserDefaults standardUserDefaults]objectForKey:LAST_BOOK_KEY];
+    
+    if(coords==nil){
+        coords=[self setDefaults];
+    }else{
+        //nothing to do
+    }
+    
+    NSUInteger row = [[coords objectForKey:ROW_KEY] integerValue];
+    NSUInteger section = [[coords objectForKey:SECTION_KEY] integerValue];
+    
+    indexPath=[NSIndexPath indexPathForRow:row inSection:section];
+    
+    return [self bookForIndexPath:indexPath];
+}
 
+-(void) saveLastSelectedBookAtSectio:(NSUInteger)section row:(NSUInteger)row{
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    [def setObject:@{SECTION_KEY : @(section),ROW_KEY : @(row)} forKey:LAST_BOOK_KEY];
+    
+    //for the flys
+    [def synchronize];
+}
+
+-(NSDictionary*) setDefaults{
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSDictionary *defBookCoords = @{SECTION_KEY:@(DEF_START_SECTION),ROW_KEY:@0};
+    
+    [def setObject:defBookCoords forKey:LAST_BOOK_KEY];
+    
+    //for the flys
+    [def synchronize];
+    
+    return defBookCoords;
+}
+
+-(RADBook*) bookForIndexPath: (NSIndexPath*) indexPath{
+    //averiguar de que tag nos están hablando
+    NSLog(@"%@",indexPath);
+    
+    RADBook *book = [self.model bookForTag:[self.model.tags objectAtIndex:indexPath.section] atIndex:indexPath.row];
+    return book;
+}
 
 #pragma mark Unused
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 #pragma mark Memory Warning
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

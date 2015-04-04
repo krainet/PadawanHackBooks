@@ -52,11 +52,17 @@
         RADLibrary *library = [[RADLibrary alloc]initFromRemoteJson];
         
         //Creamos controlador
-        RADLibTableViewController *libVC = [[RADLibTableViewController alloc]initWithModel:library style:UITableViewStyleGrouped];
-        RADBookViewController *bookVC = [[RADBookViewController alloc]initWithModel:[library.libraryBooks objectAtIndex:0]];
         
-        UINavigationController *navLib=[[UINavigationController alloc]initWithRootViewController:libVC];
-        UINavigationController *navBook=[[UINavigationController alloc]initWithRootViewController:bookVC];
+        RADLibTableViewController *libVC = [[RADLibTableViewController alloc]initWithModel:library style:UITableViewStyleGrouped];
+        
+        RADBookViewController *bookVC = [[RADBookViewController alloc]
+                                          initWithModel:[libVC lastSelectedBook]];
+        
+        UINavigationController *navLib=[[UINavigationController alloc]
+                                        initWithRootViewController:libVC];
+        
+        UINavigationController *navBook=[[UINavigationController alloc]
+                                         initWithRootViewController:bookVC];
         
         //Creamos Combinador
         UISplitViewController *splitVC = [[UISplitViewController alloc]init];

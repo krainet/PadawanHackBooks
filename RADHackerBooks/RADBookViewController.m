@@ -10,6 +10,8 @@
 #import "RADBook.h"
 #import "RADBookWebViewController.h"
 
+#import "Settings.h"
+
 @interface RADBookViewController ()
 
 @end
@@ -55,7 +57,6 @@
 }
 
 -(void) displayPdf:(id)sender{
-    NSLog(@"Go to %@",self.model.pdfUrl);
     
     //Creo instancia de WebViewController
     RADBookWebViewController *webVC = [[RADBookWebViewController alloc] initWithModel:self.model];
@@ -80,10 +81,12 @@
   invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem{
     
     self.navigationItem.rightBarButtonItem=nil;
+    self.navigationItem.leftBarButtonItem=nil;
+    
 }
 
 #pragma mark LibTableViewControllerDelegate
--(void)tvcSelectsBook:(RADBook *)book arrayOfBooks:(NSArray *)books{
+-(void)tvcSelectsBook:(RADBook *)book{
     self.model=book;
     self.title=book.title;
     //Sync vistas
@@ -94,13 +97,68 @@
 #pragma mark - Utils
 -(void) syncViewWithModel{
     self.title=self.model.title;
-    self.bootTitle.text=self.model.title;
-    self.author.text=self.model.author;
-    self.bookUrl.text=[self.model.bookUrl absoluteString];
-    self.pdfUrl.text=[self.model.pdfUrl absoluteString];
+    self.bookTitle.text=self.model.title;
+    self.tags.text=@"hola";
+    self.author.text=[@"Autor : " stringByAppendingString: self.model.author];
+    self.tags.text=[self arrayToString:self.model.tags];
+    [self.switch1 setOn:self.model.isFavorite];
     NSData *dataURL = [NSData dataWithContentsOfURL:self.model.bookUrl];
     UIImage *bookPicture = [[UIImage alloc]initWithData:dataURL];
     self.photo.image=bookPicture;
+}
+
+-(NSString *) arrayToString:(NSArray *) myArray{
+    NSString *repr = nil;
+    
+    if([myArray count] == 1) {
+        repr = [@"Temática/s : " stringByAppendingString:[myArray lastObject]];
+    }else{
+        repr = [@"Temática/s : " stringByAppendingString: [[myArray componentsJoinedByString:@", "] stringByAppendingString:@"."]];
+    }
+    
+    return repr;
+}
+
+-(IBAction)toogleUISwitch:(id)sender{
+    UISwitch *mySwitch = (UISwitch *)sender;
+    if ([mySwitch isOn]) {
+        [self saveFavoriteToUserDefaults:self.bookTitle.text Activated:YES];
+        self.model.isFavorite=YES;
+    } else {
+        [self saveFavoriteToUserDefaults:self.bookTitle.text Activated:NO];
+        self.model.isFavorite=NO;
+    }
+}
+
+-(void) saveFavoriteToUserDefaults:(NSString*) bookTitle Activated:(BOOL)activated{
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *dict =[[NSMutableDictionary alloc]init];
+    NSMutableDictionary *bookDict = [[NSMutableDictionary alloc]init];
+    
+    BOOL isActive = activated==YES?YES:NO;
+    
+    if((dict=[[def objectForKey:DEF_FAV_KEY]mutableCopy])){
+        [dict setObject:@(isActive) forKey:bookTitle];
+        [def setObject:dict forKey:DEF_FAV_KEY];
+        [self sendNotificationForFavoriteChangeWithBook:self.model];
+    } else {
+        [bookDict setObject:@(isActive) forKey:bookTitle];
+        [def setObject:bookDict forKey:DEF_FAV_KEY];
+        [self sendNotificationForFavoriteChangeWithBook:self.model];
+    }
+    
+    //for the flys
+    [def synchronize];
+    
+}
+
+
+-(void) sendNotificationForFavoriteChangeWithBook:(RADBook*)book {
+    //mandar la notificacion
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter]; // es singletone
+    NSDictionary *dict=@{BOOK_KEY:book};
+    NSNotification *n = [NSNotification notificationWithName:BOOK_DID_CHANGE_FAV_NOTIFICATION_NAME object:self userInfo:dict];
+    [nc postNotification:n];
 }
 
 @end

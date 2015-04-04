@@ -16,6 +16,7 @@
 @property (strong,nonatomic) NSArray *tags;
 @property (strong,nonatomic) NSURL *bookUrl;
 @property (strong,nonatomic) NSURL *pdfUrl;
+@property (nonatomic) BOOL isFavorite;
 
 -(id) initWithTitle:(NSString*) title
              Author:(NSString*) author

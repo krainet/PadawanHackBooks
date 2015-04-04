@@ -14,6 +14,7 @@
 
 
 @property (strong,nonatomic) NSMutableArray *allTags;
+@property (strong,nonatomic) NSMutableArray *allTagsWithoutDuplicates;
 @property (strong,nonatomic) NSMutableArray *allBooks;
 
 @end
@@ -51,7 +52,6 @@
         }
     }
     return [booksForTag sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        
         NSString *first = [(RADBook*)obj1 title];
         NSString *second = [(RADBook*)obj2 title];
         return [first localizedCaseInsensitiveCompare:second];
@@ -69,6 +69,12 @@
 
 -(void)loadBooksFromJson{
     
+    //Getting favorites
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSDictionary *favDict = [def objectForKey:DEF_FAV_KEY];
+    
+    
+    
     //Getting data from URL
     NSData *jsonData = [NSData dataWithContentsOfURL:[NSURL URLWithString:DATA_SOURCE_JSON]];
     
@@ -77,6 +83,7 @@
     
     //Initializing mutable dict & array
     self.allTags=[[NSMutableArray alloc] init];
+    self.allTagsWithoutDuplicates=[[NSMutableArray alloc] init];
     self.allBooks = [[NSMutableArray alloc]init];
 
     
@@ -87,11 +94,17 @@
             if([key  isEqual: @"tags"]){
                 NSArray *_splitItems = [[dict objectForKey:key] componentsSeparatedByString:@","];
                 for(NSString *each in _splitItems){
+                    if(![self.allTags containsObject:[each stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]]){
+                        //Quito duplicados
+                        [self.allTagsWithoutDuplicates
+                         addObject:[each stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+                    }
                     [self.allTags addObject:[each stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
                     [_clearedSplitedItems addObject:[self.allTags lastObject]];
                 }
             }
         }
+        
         
         RADBook *newBook = [[RADBook alloc]initWithTitle:[dict objectForKey:@"title"]
                                                   Author:[dict objectForKey:@"authors"]
@@ -99,13 +112,29 @@
                                                  BookUrl:[NSURL URLWithString:[dict objectForKey:@"image_url"]]
                                                   PdfUrl:[NSURL URLWithString:[dict objectForKey:@"pdf_url"]]];
         
+        //Si es favorito , le chuto una tag más & listo (habra que arreglar el listado de tags en la vista)
+        if([[favDict objectForKey:newBook.title] isEqual:@1]){
+            newBook.isFavorite=[[favDict objectForKey:newBook.title] boolValue];
+            NSMutableArray *tmpTag = [[NSMutableArray alloc]initWithArray:newBook.tags];
+            [tmpTag addObject:@"Favoritos"];
+            newBook.tags=tmpTag;
+        }else{
+            newBook.isFavorite=[[favDict objectForKey:newBook.title] boolValue];
+        }
+        
         [self.allBooks addObject:newBook];
+        
     }
     
-    self.tags=self.allTags;
+
+    NSMutableArray *_tmp=[[self.allTags sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)]mutableCopy];
+    [_tmp insertObject:@"Favoritos" atIndex:0];
+    self.tags=_tmp;
+
     self.booksCount=[self.allBooks count];
-    self.tagsCount=[self.allTags count];
+    self.tagsCount=[self.tags count];
     self.libraryBooks=self.allBooks;
+    
     
 }
 
