@@ -9,7 +9,7 @@
 @import UIKit;
 @class RADBook;
 
-@interface RADBookWebViewController : UIViewController<UIWebViewDelegate>
+@interface RADBookWebViewController : UIViewController<UIWebViewDelegate,UIScrollViewDelegate>
 
 @property (strong,nonatomic) RADBook *model;
 @property (weak,nonatomic) IBOutlet UIWebView *browser;

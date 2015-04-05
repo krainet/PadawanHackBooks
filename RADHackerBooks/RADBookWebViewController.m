@@ -48,15 +48,28 @@
     self.browser.delegate = self;
     self.activityView.hidden = NO;
     [self.activityView startAnimating];
-    
     [self.browser loadRequest:[NSURLRequest requestWithURL:aUrl]];
-    
 }
+
+
 
 #pragma mark - WebView delegate
 -(void) webViewDidFinishLoad:(UIWebView *)webView{
+    webView.scrollView.delegate=self;
+    webView.scrollView.maximumZoomScale=20;
+    webView.scrollView.minimumZoomScale=1;
+    
+    webView.scrollView.zoomScale=2;
+    webView.scrollView.zoomScale=1;
+    
+    
     [self.activityView stopAnimating];
     self.activityView.hidden = TRUE;
+}
+
+#pragma mark - UIScrollView Delegate
+-(void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale{
+    self.browser.scrollView.maximumZoomScale=20;
 }
 
 @end

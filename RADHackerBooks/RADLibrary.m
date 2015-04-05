@@ -150,17 +150,19 @@
         
         
         //[NSURL URLWithString:[dict objectForKey:@"image_url"]]
-        
+        //[NSURL URLWithString:[dict objectForKey:@"pdf_url"]]
         
         UIImage *tmpImg = [UIImage imageWithData: [NSData dataWithContentsOfURL:[docsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@", [dict objectForKey:@"title"]]]]];
         
         NSData *tmpPdfData = [NSData dataWithContentsOfURL:[docsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.pdf", [dict objectForKey:@"title"]]]];
         
+        NSURL *tmpPdfUrlLocal = [docsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.pdf", [dict objectForKey:@"title"]]];
+        
         RADBook *newBook = [[RADBook alloc]initWithTitle:[dict objectForKey:@"title"]
                                                   Author:[dict objectForKey:@"authors"]
                                                     Tags:_clearedSplitedItems
                                                  BookUrl: tmpImg
-                                                  PdfUrl:[NSURL URLWithString:[dict objectForKey:@"pdf_url"]]
+                                                  PdfUrl: tmpPdfUrlLocal
                                               pdfUrlData:tmpPdfData];
         
         //Si es favorito , le chuto una tag más & listo (habra que arreglar el listado de tags en la vista)

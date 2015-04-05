@@ -168,10 +168,10 @@
         [def setObject:bookDict forKey:DEF_FAV_KEY];
         [self sendNotificationForFavoriteChangeWithBook:self.model];
     }
-    
     //for the flys
     [def synchronize];
     
+    [self syncViewWithModel];
 }
 
 

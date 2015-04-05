@@ -49,7 +49,6 @@
         //no tenia celda a mano y tenemos que crearla a mano
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-
     
     //syncronize cell & model
     //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:book.bookUrl]];
