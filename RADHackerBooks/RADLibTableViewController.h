@@ -19,6 +19,7 @@
 #define DEF_START_SECTION 1
 
 
+//Delegate protocol TODO nombre metodo seg conv.
 @protocol LibTableViewControllerDelegate <NSObject>
 
 @optional

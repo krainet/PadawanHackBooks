@@ -14,3 +14,5 @@
 
 #define BOOK_DID_CHANGE_FAV_NOTIFICATION_NAME @"bookDidChangeNotification"
 #define BOOK_KEY @"bookKey"
+
+#define FAV_NAME @"Favoritos"

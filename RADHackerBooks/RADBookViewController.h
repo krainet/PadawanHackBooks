@@ -14,7 +14,7 @@
 
 
 
-//Importamos el .h aqui porque tiene un protocolo
+//TODO: Importamos el .h aqui  - revisar err
 #import "RADLibTableViewController.h"
 
 @interface RADBookViewController : UIViewController<UISplitViewControllerDelegate,LibTableViewControllerDelegate>

@@ -34,7 +34,7 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-#pragma mark - View LifeCycle
+#pragma mark - View
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
@@ -51,11 +51,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Actions
--(void) displayWeb:(id)sender{
-    
-}
-
+#pragma mark - Action
 -(void) displayPdf:(id)sender{
     
     //Creo instancia de WebViewController
@@ -75,6 +71,7 @@
     self.navigationItem.rightBarButtonItem=barButtonItem;
 }
 
+//TODO revisar estos delegates
 
 -(void) splitViewController:(UISplitViewController *)svc
      willShowViewController:(UIViewController *)aViewController
@@ -85,6 +82,8 @@
     
 }
 
+
+//TODO convencion de nombre para esto
 #pragma mark LibTableViewControllerDelegate
 -(void)tvcSelectsBook:(RADBook *)book{
     self.model=book;
@@ -102,11 +101,10 @@
     self.author.text=[@"Autor : " stringByAppendingString: self.model.author];
     self.tags.text=[self arrayToString:self.model.tags];
     [self.switch1 setOn:self.model.isFavorite];
-    //NSData *dataURL = [NSData dataWithContentsOfURL:self.model.bookUrl];
-    //UIImage *bookPicture = [[UIImage alloc]initWithData:dataURL];
-    //self.photo.image=bookPicture;
     self.photo.image=self.model.bookUrl;
 }
+
+
 
 -(NSString *) arrayToString:(NSArray *) myArray{
     NSString *repr = nil;
@@ -120,6 +118,7 @@
     return repr;
 }
 
+#pragma mark IBActions switch
 -(IBAction)toogleUISwitch:(id)sender{
     UISwitch *mySwitch = (UISwitch *)sender;
     
@@ -132,6 +131,7 @@
     }
 }
 
+#pragma mark - Utils
 -(void) saveFavoriteToUserDefaults:(NSString*) bookTitle Activated:(BOOL)activated{
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     NSMutableDictionary *dict =[[NSMutableDictionary alloc]init];
@@ -144,14 +144,14 @@
         //Actualizo model
         BOOL deleting = NO;
         for (int i = 0; i<self.model.tags.count; i++) {
-            if ([[muTags objectAtIndex:i]isEqualToString:@"Favoritos"]) {
+            if ([[muTags objectAtIndex:i]isEqualToString:FAV_NAME]) {
                 [muTags removeObjectAtIndex:i];
                 deleting=YES;
                 
             }
         }
         if(deleting==NO){
-            [muTags addObject:@"Favoritos"];
+            [muTags addObject:FAV_NAME];
         }
         
         self.model.tags=muTags;
@@ -161,7 +161,7 @@
         [def setObject:dict forKey:DEF_FAV_KEY];
         [self sendNotificationForFavoriteChangeWithBook:self.model];
     } else {
-        [muTags addObject:@"Favoritos"];
+        [muTags addObject:FAV_NAME];
         self.model.tags=muTags;
         self.model.isFavorite=isActive;        
         [bookDict setObject:@(isActive) forKey:bookTitle];

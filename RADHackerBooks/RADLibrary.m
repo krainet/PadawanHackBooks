@@ -77,6 +77,7 @@
 }
 
 //TODO Refactorizar esta basura de alguna forma elocuente.
+//TODO control de errores no iria mal ...
 -(void)loadBooksFromJson{
     
     //Getting favorites
@@ -134,11 +135,14 @@
         
         //images & pdf
         if(firstTimeLoad==YES){
+            //TODO gestionar esto en background de alguna manera, se come 300mb de ram.
+            //fotos
             NSURL *imgUrl = [NSURL URLWithString:[dict objectForKey:@"image_url"]];
             NSData *imgData = [NSData dataWithContentsOfURL:imgUrl];
             NSURL *imgDocumentsURL = [docsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@", [dict objectForKey:@"title"]]];
             [imgData writeToURL:imgDocumentsURL  atomically:YES];
 
+            //pdf
             NSURL *pdfUrl = [NSURL URLWithString:[dict objectForKey:@"pdf_url"]];
             NSData *pdfData = [NSData dataWithContentsOfURL:pdfUrl];
             NSURL *pdfDocumentsURL = [docsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.pdf", [dict objectForKey:@"title"]]];
@@ -165,11 +169,13 @@
                                                   PdfUrl: tmpPdfUrlLocal
                                               pdfUrlData:tmpPdfData];
         
-        //Si es favorito , le chuto una tag más & listo (habra que arreglar el listado de tags en la vista)
+        //Si es favorito , le chuto una tag más & listo
+        //TODO seria bueno en la vista eliminar la tag "Favoritos"
+        
         if([[favDict objectForKey:newBook.title] isEqual:@1]){
             newBook.isFavorite=[[favDict objectForKey:newBook.title] boolValue];
             NSMutableArray *tmpTag = [[NSMutableArray alloc]initWithArray:newBook.tags];
-            [tmpTag addObject:@"Favoritos"];
+            [tmpTag addObject:FAV_NAME];
             newBook.tags=tmpTag;
         }else{
             newBook.isFavorite=[[favDict objectForKey:newBook.title] boolValue];
@@ -181,7 +187,7 @@
     
 
     NSMutableArray *_tmp=[[self.allTagsWithoutDuplicates sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)]mutableCopy];
-    [_tmp insertObject:@"Favoritos" atIndex:0];
+    [_tmp insertObject:FAV_NAME atIndex:0];
     self.tags=_tmp;
 
     self.booksCount=[self.allBooks count];

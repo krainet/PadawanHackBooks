@@ -44,16 +44,14 @@
     //averiguar de que tag nos están hablando
     RADBook *book = [self.model bookForTag:[self.model.tags objectAtIndex:indexPath.section] atIndex:indexPath.row];
     
-    //REUTILIZAR - Forzaré siempre celda, no se porque en vertical no me funciona bien el table.
+    //REUTILIZAR celdas
     if(cell==nil){
         //no tenia celda a mano y tenemos que crearla a mano
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    } else {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     //syncronize cell & model
-    //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:book.bookUrl]];
+    //TODO implementar celda personalizada
     UIImage *image = book.bookUrl;
     cell.imageView.image=image;
     cell.textLabel.text=book.title;

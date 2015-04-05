@@ -87,7 +87,7 @@
         //Creamos Combinador
         UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:libVC];
         
-        //Asegnamos delegados
+        //Asegnamos delegados (delegado de si mismo)
         libVC.delegate=libVC;
         
         //Asignamos root
