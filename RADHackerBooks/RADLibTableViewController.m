@@ -52,7 +52,8 @@
 
     
     //syncronize cell & model
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:book.bookUrl]];
+    //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:book.bookUrl]];
+    UIImage *image = book.bookUrl;
     cell.imageView.image=image;
     cell.textLabel.text=book.title;
     cell.detailTextLabel.text=book.author;

@@ -7,6 +7,7 @@
 //
 
 @import Foundation;
+@import UIKit;
 
 @interface RADBook : NSObject
 
@@ -14,15 +15,17 @@
 @property (copy,nonatomic) NSString *title;
 @property (copy,nonatomic) NSString *author;
 @property (strong,nonatomic) NSArray *tags;
-@property (strong,nonatomic) NSURL *bookUrl;
+@property (strong,nonatomic) UIImage *bookUrl;
 @property (strong,nonatomic) NSURL *pdfUrl;
+@property (strong,nonatomic) NSData *pdfUrldata;
 @property (nonatomic) BOOL isFavorite;
 
 -(id) initWithTitle:(NSString*) title
              Author:(NSString*) author
                Tags:(NSArray*) tags
-            BookUrl:(NSURL*) bookUrl
-             PdfUrl:(NSURL*) pdfUrl;
+            BookUrl:(UIImage*) bookUrl
+             PdfUrl:(NSURL*) pdfUrl
+         pdfUrlData:(NSData*) pdfUrlData;
 
 -(id) initFromJson:(NSData*) data;
 

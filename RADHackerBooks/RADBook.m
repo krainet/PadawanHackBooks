@@ -14,14 +14,16 @@
 -(id) initWithTitle:(NSString*) title
              Author:(NSString*) author
                Tags:(NSArray*) tags
-            BookUrl:(NSURL*) bookUrl
-             PdfUrl:(NSURL*) pdfUrl{
+            BookUrl:(UIImage*) bookUrl
+             PdfUrl:(NSURL*) pdfUrl
+         pdfUrlData:(NSData*) pdfUrlData{
     
     if(self=[super init]) {
         _title=title;
         _author=author;
         _tags=tags;
         _bookUrl=bookUrl;
+        _pdfUrldata=pdfUrlData;
         _pdfUrl=pdfUrl;
     }
 

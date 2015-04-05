@@ -47,12 +47,11 @@
 -(void) configureForDisplayType: (NSUInteger) idType{
     if(idType==1){
         //isPad
-        //is phone
+        
         //Creamos modelo
         RADLibrary *library = [[RADLibrary alloc]initFromRemoteJson];
         
         //Creamos controlador
-        
         RADLibTableViewController *libVC = [[RADLibTableViewController alloc]initWithModel:library style:UITableViewStyleGrouped];
         
         RADBookViewController *bookVC = [[RADBookViewController alloc]
@@ -95,16 +94,6 @@
         self.window.rootViewController=navVC;
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

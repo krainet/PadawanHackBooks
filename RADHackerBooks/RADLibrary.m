@@ -66,16 +66,44 @@
 
 #pragma mark - Utils
 
+-(BOOL) isFirstTimeLoad{
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    if([def objectForKey:@"settings"]){
+        return NO;
+    }else{
+        [def setObject:@1 forKey:@"settings"];
+        return YES;
+    }
+}
+
+
 -(void)loadBooksFromJson{
     
     //Getting favorites
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     NSDictionary *favDict = [def objectForKey:DEF_FAV_KEY];
     
+    //Data vars
+    NSData *jsonData = [NSData new];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *docsURL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask]lastObject];
+    NSURL *docsJsonURL = [docsURL URLByAppendingPathComponent:@"myLib.json"];
     
+    BOOL firstTimeLoad = [self isFirstTimeLoad];
     
-    //Getting data from URL
-    NSData *jsonData = [NSData dataWithContentsOfURL:[NSURL URLWithString:DATA_SOURCE_JSON]];
+    if(firstTimeLoad==YES){
+        NSLog(@"Downloading & Saving JSON");
+        jsonData = [NSData dataWithContentsOfURL:[NSURL URLWithString:DATA_SOURCE_JSON]];
+        [jsonData writeToURL:docsJsonURL atomically:YES];
+    } else {
+        //Read local json
+        NSLog(@"Reading local JSON");
+        jsonData = [NSData dataWithContentsOfURL:docsJsonURL];
+    }
+    
+    if(jsonData==nil){
+        jsonData = [NSData dataWithContentsOfURL:[NSURL URLWithString:DATA_SOURCE_JSON]];
+    }
     
     NSError *jsonError = nil;
     id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&jsonError];
@@ -85,9 +113,9 @@
     self.allTagsWithoutDuplicates=[[NSMutableArray alloc] init];
     self.allBooks = [[NSMutableArray alloc]init];
 
-    
     for(int i=0;i<[jsonObject count];i++){
         NSDictionary *dict = [jsonObject objectAtIndex:i];
+        
         NSMutableArray *_clearedSplitedItems = [[NSMutableArray alloc]init];
         for (NSString *key in dict) {
             if([key  isEqual: @"tags"]){
@@ -104,12 +132,36 @@
             }
         }
         
+        //images
+        if(firstTimeLoad==YES){
+            NSURL *imgUrl = [NSURL URLWithString:[dict objectForKey:@"image_url"]];
+            NSData *imgData = [NSData dataWithContentsOfURL:imgUrl];
+            NSURL *imgDocumentsURL = [docsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@", [dict objectForKey:@"title"]]];
+            [imgData writeToURL:imgDocumentsURL  atomically:YES];
+
+            NSURL *pdfUrl = [NSURL URLWithString:[dict objectForKey:@"pdf_url"]];
+            NSData *pdfData = [NSData dataWithContentsOfURL:pdfUrl];
+            NSURL *pdfDocumentsURL = [docsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.pdf", [dict objectForKey:@"title"]]];
+            [pdfData writeToURL:pdfDocumentsURL  atomically:YES];
+            NSLog(@"Downloading pdf for book %@",[dict objectForKey:@"title"]);
+            
+            
+        }
+        
+        
+        //[NSURL URLWithString:[dict objectForKey:@"image_url"]]
+        
+        
+        UIImage *tmpImg = [UIImage imageWithData: [NSData dataWithContentsOfURL:[docsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@", [dict objectForKey:@"title"]]]]];
+        
+        NSData *tmpPdfData = [NSData dataWithContentsOfURL:[docsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.pdf", [dict objectForKey:@"title"]]]];
         
         RADBook *newBook = [[RADBook alloc]initWithTitle:[dict objectForKey:@"title"]
                                                   Author:[dict objectForKey:@"authors"]
                                                     Tags:_clearedSplitedItems
-                                                 BookUrl:[NSURL URLWithString:[dict objectForKey:@"image_url"]]
-                                                  PdfUrl:[NSURL URLWithString:[dict objectForKey:@"pdf_url"]]];
+                                                 BookUrl: tmpImg
+                                                  PdfUrl:[NSURL URLWithString:[dict objectForKey:@"pdf_url"]]
+                                              pdfUrlData:tmpPdfData];
         
         //Si es favorito , le chuto una tag más & listo (habra que arreglar el listado de tags en la vista)
         if([[favDict objectForKey:newBook.title] isEqual:@1]){

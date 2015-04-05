@@ -102,9 +102,10 @@
     self.author.text=[@"Autor : " stringByAppendingString: self.model.author];
     self.tags.text=[self arrayToString:self.model.tags];
     [self.switch1 setOn:self.model.isFavorite];
-    NSData *dataURL = [NSData dataWithContentsOfURL:self.model.bookUrl];
-    UIImage *bookPicture = [[UIImage alloc]initWithData:dataURL];
-    self.photo.image=bookPicture;
+    //NSData *dataURL = [NSData dataWithContentsOfURL:self.model.bookUrl];
+    //UIImage *bookPicture = [[UIImage alloc]initWithData:dataURL];
+    //self.photo.image=bookPicture;
+    self.photo.image=self.model.bookUrl;
 }
 
 -(NSString *) arrayToString:(NSArray *) myArray{
