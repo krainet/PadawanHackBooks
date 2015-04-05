@@ -173,6 +173,7 @@
     
     //actualizamos el modelo
     self.model.libraryBooks=mutBooks;
+    [self.tableView reloadData];
     
 }
 
