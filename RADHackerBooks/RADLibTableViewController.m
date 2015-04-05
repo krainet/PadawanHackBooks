@@ -10,6 +10,7 @@
 #import "RADBook.h"
 #import "RADBookViewController.h"
 #import "RADLibrary.h"
+#import "Settings.h"
 
 @interface RADLibTableViewController ()
 
@@ -81,12 +82,20 @@
     return [[[self.model tags]objectAtIndex:section]capitalizedString];
 }
 
+-(void) viewWillDisappear:(BOOL)animated{
+    //baja notif
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self.tableView reloadData];
-    
-    //self.navigationController.navigationBar.barTintColor=[UIColor colorWithRed:0.5 green:0 blue:0.13 alpha:1];
+    //alta notif
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(notifyThatBookFavDidChange:)
+               name:BOOK_DID_CHANGE_FAV_NOTIFICATION_NAME
+             object:nil];
 }
 
 
@@ -139,11 +148,33 @@
 
 -(RADBook*) bookForIndexPath: (NSIndexPath*) indexPath{
     //averiguar de que tag nos están hablando
-    NSLog(@"%@",indexPath);
     
     RADBook *book = [self.model bookForTag:[self.model.tags objectAtIndex:indexPath.section] atIndex:indexPath.row];
     return book;
 }
+
+#pragma mark Notifications
+-(void)notifyThatBookFavDidChange:(NSNotification*) notification{
+    //Obtengo Libro desde notification ;D I love notifications jeje
+    
+    RADBook *book = [notification.userInfo objectForKey:BOOK_KEY];
+    
+    NSMutableArray *mutBooks = [[NSMutableArray alloc]initWithArray:self.model.libraryBooks];
+
+    
+    for (int x=0; x<mutBooks.count; x++) {
+        //NSLog(@"title %@",[[mutBooks objectAtIndex:x] title]);
+        if([[[mutBooks objectAtIndex:x]title] containsString:book.title]){
+            [mutBooks replaceObjectAtIndex:x withObject:book];
+        }
+    }
+    
+    //actualizamos el modelo
+    self.model.libraryBooks=mutBooks;
+    
+    [self.tableView reloadData];
+}
+
 
 #pragma mark Unused
 - (void)viewDidLoad {

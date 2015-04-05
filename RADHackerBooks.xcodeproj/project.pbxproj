@@ -11,6 +11,7 @@
 		1E4DE38A1ACEEB83008F4BCD /* RADBookWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4DE3881ACEEB83008F4BCD /* RADBookWebViewController.m */; };
 		1E4DE38B1ACEEB83008F4BCD /* RADBookWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E4DE3891ACEEB83008F4BCD /* RADBookWebViewController.xib */; };
 		1E8B12991ACF183900BD6331 /* RADBookViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8B12981ACF183900BD6331 /* RADBookViewController~ipad.xib */; };
+		1EC4F72C1AD1486000F96D5F /* launchscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EC4F72B1AD1486000F96D5F /* launchscreen.png */; };
 		1ED6A3A91AC6A54B00AA9D69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6A3A81AC6A54B00AA9D69 /* main.m */; };
 		1ED6A3AC1AC6A54B00AA9D69 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6A3AB1AC6A54B00AA9D69 /* AppDelegate.m */; };
 		1ED6A3AE1AC6A54B00AA9D69 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ED6A3AD1AC6A54B00AA9D69 /* Images.xcassets */; };
@@ -39,6 +40,7 @@
 		1E4DE3881ACEEB83008F4BCD /* RADBookWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RADBookWebViewController.m; sourceTree = "<group>"; };
 		1E4DE3891ACEEB83008F4BCD /* RADBookWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RADBookWebViewController.xib; sourceTree = "<group>"; };
 		1E8B12981ACF183900BD6331 /* RADBookViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "RADBookViewController~ipad.xib"; sourceTree = "<group>"; };
+		1EC4F72B1AD1486000F96D5F /* launchscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchscreen.png; sourceTree = "<group>"; };
 		1ED6A3A31AC6A54B00AA9D69 /* RADHackerBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RADHackerBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ED6A3A71AC6A54B00AA9D69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1ED6A3A81AC6A54B00AA9D69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		1ECF11971AC6F9D300C50228 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1EC4F72B1AD1486000F96D5F /* launchscreen.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 			files = (
 				1E4DE38B1ACEEB83008F4BCD /* RADBookWebViewController.xib in Resources */,
 				1ED6A3D11AC6C79200AA9D69 /* RADBookViewController.xib in Resources */,
+				1EC4F72C1AD1486000F96D5F /* launchscreen.png in Resources */,
 				1ED6A3B11AC6A54B00AA9D69 /* LaunchScreen.xib in Resources */,
 				1E8B12991ACF183900BD6331 /* RADBookViewController~ipad.xib in Resources */,
 				1ED6A3AE1AC6A54B00AA9D69 /* Images.xcassets in Resources */,

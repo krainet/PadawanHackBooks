@@ -16,6 +16,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (weak,nonatomic) IBOutlet UIActivityIndicatorView *activityViewFirst;
+@property (weak,nonatomic) IBOutlet UIImageView *startImage;
 
 //Display type
 //1 for Tabblet & 2 for Iphone

@@ -58,7 +58,6 @@
     }];
 }
 
-
 //Selected book in tag (atIndex);
 -(RADBook*) bookForTag:(NSString*) tag atIndex:(NSUInteger) index{
     return [[self booksForTag:tag]objectAtIndex:index];

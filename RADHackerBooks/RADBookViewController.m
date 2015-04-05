@@ -138,6 +138,23 @@
     BOOL isActive = activated==YES?YES:NO;
     
     if((dict=[[def objectForKey:DEF_FAV_KEY]mutableCopy])){
+        //Actualizo model
+        NSMutableArray *muTags = [[NSMutableArray alloc]initWithArray:self.model.tags];
+        BOOL deleting = NO;
+        for (int i = 0; i<self.model.tags.count; i++) {
+            if ([[muTags objectAtIndex:i]isEqualToString:@"Favoritos"]) {
+                [muTags removeObjectAtIndex:i];
+                deleting=YES;
+                
+            }
+        }
+        if(deleting==NO){
+            [muTags addObject:@"Favoritos"];
+        }
+        
+        self.model.tags=muTags;
+        self.model.isFavorite=isActive;
+        
         [dict setObject:@(isActive) forKey:bookTitle];
         [def setObject:dict forKey:DEF_FAV_KEY];
         [self sendNotificationForFavoriteChangeWithBook:self.model];
