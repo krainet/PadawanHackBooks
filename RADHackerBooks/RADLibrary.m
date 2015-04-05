@@ -126,12 +126,12 @@
     }
     
 
-    NSMutableArray *_tmp=[[self.allTags sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)]mutableCopy];
+    NSMutableArray *_tmp=[[self.allTagsWithoutDuplicates sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)]mutableCopy];
     [_tmp insertObject:@"Favoritos" atIndex:0];
     self.tags=_tmp;
 
     self.booksCount=[self.allBooks count];
-    self.tagsCount=[self.tags count];
+    self.tagsCount=[self.allTagsWithoutDuplicates count];
     self.libraryBooks=self.allBooks;
     
     
