@@ -122,11 +122,12 @@
 
 -(IBAction)toogleUISwitch:(id)sender{
     UISwitch *mySwitch = (UISwitch *)sender;
+    
     if ([mySwitch isOn]) {
-        [self saveFavoriteToUserDefaults:self.bookTitle.text Activated:YES];
+        [self saveFavoriteToUserDefaults:self.model.title Activated:YES];
         self.model.isFavorite=YES;
     } else {
-        [self saveFavoriteToUserDefaults:self.bookTitle.text Activated:NO];
+        [self saveFavoriteToUserDefaults:self.model.title Activated:NO];
         self.model.isFavorite=NO;
     }
 }
@@ -137,10 +138,10 @@
     NSMutableDictionary *bookDict = [[NSMutableDictionary alloc]init];
     
     BOOL isActive = activated==YES?YES:NO;
+    NSMutableArray *muTags = [[NSMutableArray alloc]initWithArray:self.model.tags];
     
     if((dict=[[def objectForKey:DEF_FAV_KEY]mutableCopy])){
         //Actualizo model
-        NSMutableArray *muTags = [[NSMutableArray alloc]initWithArray:self.model.tags];
         BOOL deleting = NO;
         for (int i = 0; i<self.model.tags.count; i++) {
             if ([[muTags objectAtIndex:i]isEqualToString:@"Favoritos"]) {
@@ -160,6 +161,9 @@
         [def setObject:dict forKey:DEF_FAV_KEY];
         [self sendNotificationForFavoriteChangeWithBook:self.model];
     } else {
+        [muTags addObject:@"Favoritos"];
+        self.model.tags=muTags;
+        self.model.isFavorite=isActive;        
         [bookDict setObject:@(isActive) forKey:bookTitle];
         [def setObject:bookDict forKey:DEF_FAV_KEY];
         [self sendNotificationForFavoriteChangeWithBook:self.model];
@@ -175,7 +179,9 @@
     //mandar la notificacion
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter]; // es singletone
     NSDictionary *dict=@{BOOK_KEY:book};
+    
     NSNotification *n = [NSNotification notificationWithName:BOOK_DID_CHANGE_FAV_NOTIFICATION_NAME object:self userInfo:dict];
+    
     [nc postNotification:n];
 }
 
