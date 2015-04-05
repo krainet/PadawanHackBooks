@@ -76,7 +76,7 @@
     }
 }
 
-
+//TODO Refactorizar esta basura de alguna forma elocuente.
 -(void)loadBooksFromJson{
     
     //Getting favorites
@@ -132,7 +132,7 @@
             }
         }
         
-        //images
+        //images & pdf
         if(firstTimeLoad==YES){
             NSURL *imgUrl = [NSURL URLWithString:[dict objectForKey:@"image_url"]];
             NSData *imgData = [NSData dataWithContentsOfURL:imgUrl];

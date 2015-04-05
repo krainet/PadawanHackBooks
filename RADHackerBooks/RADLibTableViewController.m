@@ -43,10 +43,12 @@
 
     //averiguar de que tag nos están hablando
     RADBook *book = [self.model bookForTag:[self.model.tags objectAtIndex:indexPath.section] atIndex:indexPath.row];
-
-    //reutilizar
+    
+    //REUTILIZAR - Forzaré siempre celda, no se porque en vertical no me funciona bien el table.
     if(cell==nil){
         //no tenia celda a mano y tenemos que crearla a mano
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    } else {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
@@ -89,6 +91,7 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.tableView reloadData];
     
     //alta notif
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -147,15 +150,14 @@
 }
 
 -(RADBook*) bookForIndexPath: (NSIndexPath*) indexPath{
-    //averiguar de que tag nos están hablando
-    
+    //averiguar de que book nos están hablando
     RADBook *book = [self.model bookForTag:[self.model.tags objectAtIndex:indexPath.section] atIndex:indexPath.row];
     return book;
 }
 
 #pragma mark Notifications
 -(void)notifyThatBookFavDidChange:(NSNotification*) notification{
-    //Obtengo Libro desde notification ;D I love notifications jeje
+    //Obtengo Libro desde notification
     
     RADBook *book = [notification.userInfo objectForKey:BOOK_KEY];
     
@@ -172,7 +174,6 @@
     //actualizamos el modelo
     self.model.libraryBooks=mutBooks;
     
-    [self.tableView reloadData];
 }
 
 

@@ -23,7 +23,7 @@
 
 @optional
 -(void)tvcSelectsBook:(RADBook*)book;
--(void)libTableViewControlle:(RADLibTableViewController*)bookVC didSelected:(RADBook *) book;
+
 
 @end
 
