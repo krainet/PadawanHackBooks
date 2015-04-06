@@ -12,6 +12,7 @@
 @class RADLibrary;
 @class RADBookViewController;
 @class RADLibTableViewController;
+@class RADLibTableViewControllerCell;
 
 #define LAST_BOOK_KEY @"lastBook"
 #define ROW_KEY @"row"

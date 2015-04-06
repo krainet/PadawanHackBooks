@@ -11,6 +11,7 @@
 #import "RADBookViewController.h"
 #import "RADLibrary.h"
 #import "Settings.h"
+#import "RADLibTableViewControllerCell.h"
 
 @interface RADLibTableViewController ()
 
@@ -28,6 +29,14 @@
 }
 
 #pragma mark - Table view data source
+-(void) viewDidLoad{
+    [super viewDidLoad];
+    
+    UINib *cellNib = [UINib nibWithNibName:@"RADLibTableViewControllerCell" bundle:nil];
+    [self.tableView registerNib:cellNib
+         forCellReuseIdentifier:[RADLibTableViewControllerCell getCellId]];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.model.tagsCount;
 }
@@ -38,8 +47,11 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //static NSString *CellIdentifier = @"Cell";
+    NSString *CellIdentifier = [RADLibTableViewControllerCell getCellId];
+    
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    RADLibTableViewControllerCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     //averiguar de que tag nos están hablando
     RADBook *book = [self.model bookForTag:[self.model.tags objectAtIndex:indexPath.section] atIndex:indexPath.row];
@@ -47,15 +59,22 @@
     //REUTILIZAR celdas
     if(cell==nil){
         //no tenia celda a mano y tenemos que crearla a mano
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[RADLibTableViewControllerCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     //syncronize cell & model
-    //TODO implementar celda personalizada
+    if(book.isFavorite==YES){
+        NSLog(@"Libro %@ is Favorite!",book.title);
+        cell.bookFavIcon.image=[UIImage imageNamed:@"like.png"];
+    }else{
+        cell.bookFavIcon.image=[UIImage imageNamed:@"unlike.png"];
+    }
+    
+    
     UIImage *image = book.bookUrl;
     cell.imageView.image=image;
-    cell.textLabel.text=book.title;
-    cell.detailTextLabel.text=book.author;
+    cell.bookTitle.text=book.title;
+    cell.bookAuthor.text=book.author;
     
     return cell;
 }
@@ -176,10 +195,7 @@
 }
 
 
-#pragma mark Unused
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
+
 
 #pragma mark Memory Warning
 - (void)didReceiveMemoryWarning {
