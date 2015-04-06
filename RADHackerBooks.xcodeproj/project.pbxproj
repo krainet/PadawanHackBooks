@@ -11,6 +11,10 @@
 		1E4DE38A1ACEEB83008F4BCD /* RADBookWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4DE3881ACEEB83008F4BCD /* RADBookWebViewController.m */; };
 		1E4DE38B1ACEEB83008F4BCD /* RADBookWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E4DE3891ACEEB83008F4BCD /* RADBookWebViewController.xib */; };
 		1E8B12991ACF183900BD6331 /* RADBookViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8B12981ACF183900BD6331 /* RADBookViewController~ipad.xib */; };
+		1E9ACBCC1AD28B530071585F /* RADLibTableViewControllerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9ACBCA1AD28B530071585F /* RADLibTableViewControllerCell.m */; };
+		1E9ACBCD1AD28B530071585F /* RADLibTableViewControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E9ACBCB1AD28B530071585F /* RADLibTableViewControllerCell.xib */; };
+		1E9ACBD11AD2A24D0071585F /* unlike.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9ACBD01AD2A24D0071585F /* unlike.png */; };
+		1E9ACBD31AD2A35F0071585F /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9ACBD21AD2A35F0071585F /* like.png */; };
 		1EC4F72C1AD1486000F96D5F /* launchscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EC4F72B1AD1486000F96D5F /* launchscreen.png */; };
 		1EC4F7311AD1C2FA00F96D5F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EC4F72F1AD1C2FA00F96D5F /* icon.png */; };
 		1EC4F7321AD1C2FA00F96D5F /* iconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EC4F7301AD1C2FA00F96D5F /* iconSmall.png */; };
@@ -42,6 +46,11 @@
 		1E4DE3881ACEEB83008F4BCD /* RADBookWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RADBookWebViewController.m; sourceTree = "<group>"; };
 		1E4DE3891ACEEB83008F4BCD /* RADBookWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RADBookWebViewController.xib; sourceTree = "<group>"; };
 		1E8B12981ACF183900BD6331 /* RADBookViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "RADBookViewController~ipad.xib"; sourceTree = "<group>"; };
+		1E9ACBC91AD28B530071585F /* RADLibTableViewControllerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RADLibTableViewControllerCell.h; sourceTree = "<group>"; };
+		1E9ACBCA1AD28B530071585F /* RADLibTableViewControllerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RADLibTableViewControllerCell.m; sourceTree = "<group>"; };
+		1E9ACBCB1AD28B530071585F /* RADLibTableViewControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RADLibTableViewControllerCell.xib; sourceTree = "<group>"; };
+		1E9ACBD01AD2A24D0071585F /* unlike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unlike.png; sourceTree = "<group>"; };
+		1E9ACBD21AD2A35F0071585F /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		1EC4F72B1AD1486000F96D5F /* launchscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchscreen.png; sourceTree = "<group>"; };
 		1EC4F72F1AD1C2FA00F96D5F /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		1EC4F7301AD1C2FA00F96D5F /* iconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconSmall.png; sourceTree = "<group>"; };
@@ -86,6 +95,8 @@
 		1ECF11971AC6F9D300C50228 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1E9ACBD21AD2A35F0071585F /* like.png */,
+				1E9ACBD01AD2A24D0071585F /* unlike.png */,
 				1EC4F72F1AD1C2FA00F96D5F /* icon.png */,
 				1EC4F7301AD1C2FA00F96D5F /* iconSmall.png */,
 				1EC4F72B1AD1486000F96D5F /* launchscreen.png */,
@@ -176,6 +187,9 @@
 				1E4DE3871ACEEB83008F4BCD /* RADBookWebViewController.h */,
 				1E4DE3881ACEEB83008F4BCD /* RADBookWebViewController.m */,
 				1E4DE3891ACEEB83008F4BCD /* RADBookWebViewController.xib */,
+				1E9ACBC91AD28B530071585F /* RADLibTableViewControllerCell.h */,
+				1E9ACBCA1AD28B530071585F /* RADLibTableViewControllerCell.m */,
+				1E9ACBCB1AD28B530071585F /* RADLibTableViewControllerCell.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -269,7 +283,10 @@
 				1EC4F72C1AD1486000F96D5F /* launchscreen.png in Resources */,
 				1ED6A3B11AC6A54B00AA9D69 /* LaunchScreen.xib in Resources */,
 				1E8B12991ACF183900BD6331 /* RADBookViewController~ipad.xib in Resources */,
+				1E9ACBCD1AD28B530071585F /* RADLibTableViewControllerCell.xib in Resources */,
 				1ED6A3AE1AC6A54B00AA9D69 /* Images.xcassets in Resources */,
+				1E9ACBD11AD2A24D0071585F /* unlike.png in Resources */,
+				1E9ACBD31AD2A35F0071585F /* like.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +311,7 @@
 				1E4DE38A1ACEEB83008F4BCD /* RADBookWebViewController.m in Sources */,
 				1ED6A3A91AC6A54B00AA9D69 /* main.m in Sources */,
 				1ED6A3CC1AC6AF3200AA9D69 /* RADLibrary.m in Sources */,
+				1E9ACBCC1AD28B530071585F /* RADLibTableViewControllerCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
